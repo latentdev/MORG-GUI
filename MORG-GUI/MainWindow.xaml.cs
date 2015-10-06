@@ -22,24 +22,46 @@ namespace MORG_GUI
     {
         public MainWindow()
         {
-            InitializeComponent();
+            
             Organism a = new ORG_A();
             Organism b = new ORG_B();
             Organism c = new ORG_C();
 
-            Field field = new Field(10, 10);
-            textBox.Text = (a.PerformMove(a,field) + "\n" + b.PerformMove(b,field) + "\n" + c.PerformMove(c, field) + "\n");
+            Field field = new Field(25, 25);
+            for (int x = 0; x < 3; x++)
+            {
+                textBox.Text = (a.PerformMove(a, field) + "\n" + b.PerformMove(b, field) + "\n" + c.PerformMove(c, field) + "\n");
+            }
             //Canvas myCanvas = new Canvas();
-            Line line = new Line();
-            line.Stroke = Brushes.LightSteelBlue;
 
-            line.X1 = 1;
-            line.X2 = 100;
-            line.Y1 = 1;
-            line.Y2 = 100;
+            for (int i = 1; i < field.Getx_size(); i++)
+            {
+                Line line = new Line();
+                line.Stroke = Brushes.Black;
+                line.X1 = 1;
+                line.X2 = 400;
+                line.Y1 = (400 / field.Getx_size()) * i;
+                line.Y2 = (400 / field.Getx_size()) * i;
 
-            line.StrokeThickness = 3;
-            myCanvas.Children.Add(line);
+
+                line.StrokeThickness = 2;
+                myCanvas.Children.Add(line);
+            }
+
+            for (int i = 1; i < field.Gety_size(); i++)
+            {
+                Line line = new Line();
+                line.Stroke = Brushes.Black;
+                line.X1 = (400 / field.Gety_size()) * i;
+                line.X2 = (400 / field.Gety_size()) * i;
+                line.Y1 = 1 ;
+                line.Y2 = 400 ;
+
+
+                line.StrokeThickness = 2;
+                myCanvas.Children.Add(line);
+            }
+            InitializeComponent();
         }
     }
 }

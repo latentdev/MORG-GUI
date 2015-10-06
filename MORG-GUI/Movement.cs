@@ -30,12 +30,12 @@ namespace MORG_GUI
                     h.Sety(tempy - 1);
                     tempy -= 1;
                     Console.Write(" moves up to ");
-                    text_direction = " moves up to ";
+                    text_direction = " up to ";
                 }
                 else
                 {
                     Console.Write(" stays at ");
-                    text_direction = " stays at ";
+                    text_direction = " nowhere at ";
                 }
             }
             else if (direction == 2)
@@ -45,12 +45,12 @@ namespace MORG_GUI
                     h.Setx(tempx + 1);
                     tempx += 1;
                     Console.Write(" moves right to ");
-                    text_direction = " moves right to ";
+                    text_direction = " right to ";
                 }
                 else
                 {
                     Console.Write(" stays at ");
-                    text_direction = " stays at ";
+                    text_direction = " nowhere at ";
                 }
             }
             else if (direction == 3)
@@ -60,12 +60,12 @@ namespace MORG_GUI
                     h.Sety(tempy + 1);
                     tempy += 1;
                     Console.Write(" moves down to ");
-                    text_direction = " moves down to ";
+                    text_direction = " down to ";
                 }
                 else
                 {
                     Console.Write(" stays at ");
-                    text_direction = " stays at ";
+                    text_direction = " nowhere at ";
                 }
             }
             else if (direction == 4)
@@ -75,12 +75,12 @@ namespace MORG_GUI
                     h.Setx(tempx - 1);
                     tempx -= 1;
                     Console.Write(" moves left to ");
-                    text_direction = " moves left to ";
+                    text_direction = " left to ";
                 }
                 else
                 {
                     Console.Write(" stays at ");
-                    text_direction = " stays at ";
+                    text_direction = " nowhere at ";
                 }
 
             }
@@ -112,7 +112,7 @@ namespace MORG_GUI
             string temp_name = h.Getname();
             Console.Write(temp_name);
             Console.Write(" Paddles");
-            movement_stuff(h,m);
+            //movement_stuff(h,m);
 
             return temp_name + " Paddles" + movement_stuff(h, m);
         }

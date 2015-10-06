@@ -24,8 +24,11 @@ namespace MORG_GUI
         {
             InitializeComponent();
             Organism a = new ORG_A();
+            Organism b = new ORG_B();
+            Organism c = new ORG_C();
+
             Field field = new Field(10, 10);
-            textBox.Text = (a.PerformMove(a,field));
+            textBox.Text = (a.PerformMove(a,field) + "\n" + b.PerformMove(b,field) + "\n" + c.PerformMove(c, field) + "\n");
             //Canvas myCanvas = new Canvas();
             Line line = new Line();
             line.Stroke = Brushes.LightSteelBlue;

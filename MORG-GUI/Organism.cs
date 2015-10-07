@@ -9,15 +9,16 @@ namespace MORG_GUI
     class Organism
     {
         protected MoveBehavior movebehavior;
-        protected char type;
+        protected string type;
         protected int x;
         protected int y;
         protected string name;
+        protected string final_script;
 
-        public string PerformMove(Organism h, Field m)
+        public void PerformMove(Organism h, Field m)
         {
-            //movebehavior.move(h,m);
-            return movebehavior.move(h, m);
+            movebehavior.move(h,m);
+            setFinal_script(movebehavior.get_description());
         }
 
         public int Getx()
@@ -44,6 +45,20 @@ namespace MORG_GUI
         {
             return name;
         }
+
+        public string Gettype()
+        {
+            return type;
+        }
+        public void setFinal_script(string s)
+        {
+            final_script = s;
+        }
+
+        public string getFinal_script()
+        {
+            return final_script;
+        }
     }
 
     class ORG_A : Organism
@@ -51,7 +66,7 @@ namespace MORG_GUI
 
         public ORG_A()
         {
-            type = 'a';
+            type = "A";
             x = 1;
             y = 1;
             name = "Organism A";
@@ -64,7 +79,7 @@ namespace MORG_GUI
     {
         public ORG_B()
         {
-            type = 'b';
+            type = "B";
             x = 3;
             y = 3;
             name = "Organism B";
@@ -77,7 +92,7 @@ namespace MORG_GUI
     {
         public ORG_C()
         {
-            type = 'c';
+            type = "C";
             x = 2;
             y = 2;
             name = "Organism C";

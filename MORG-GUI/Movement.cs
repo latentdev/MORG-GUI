@@ -8,13 +8,15 @@ namespace MORG_GUI
 {
     interface MoveBehavior
     {
-        String move(Organism h, Field m);
+        void move(Organism h, Field m);
+        string get_description();
     }
 
     class Movement
     {
         int direction;
-        public string movement_stuff(Organism h, Field m)
+        string description;
+        public void movement_stuff(Organism h, Field m)
         {
             int tempx = h.Getx();
             int tempy = h.Gety();
@@ -23,7 +25,7 @@ namespace MORG_GUI
             string text_direction = null;
 
             direction = m.n.Next(1, 5); // 1=up, 2=right, 3=down, 4=left
-            if (direction == 1) 
+            if (direction == 1)
             {
                 if (tempy > tempy_size)//checking to make sure we are still in bounds
                 {
@@ -87,34 +89,53 @@ namespace MORG_GUI
             Console.Write(tempx);
             Console.Write(",");
             Console.WriteLine(tempy);
-            return text_direction + "(" + tempx + "," + tempy + ")";
+        
+            description = text_direction + "(" + tempx + "," + tempy + ")";
+        }
+        public void Setdescription(string s)
+        {
+            description = s;
+        }
+        public string Getdescription()
+        {
+            return description;
         }
     }
     class Oozes : Movement , MoveBehavior
     {
-        public string move(Organism h, Field m)
+        public void move(Organism h, Field m)
         {
             string temp_name = h.Getname();
             Console.Write(temp_name);
             Console.Write(" Oozes");
-           
 
-            return temp_name +" Oozes" + movement_stuff(h,m);
 
+            movement_stuff(h, m);
+            Setdescription(temp_name + " Oozes" + Getdescription());
+        }
+
+        public string get_description()
+        {
+            return Getdescription();
         }
 
     }
 
     class Paddles : Movement , MoveBehavior
     {
-        public string move(Organism h, Field m)
+        public void move(Organism h, Field m)
         {
             string temp_name = h.Getname();
             Console.Write(temp_name);
             Console.Write(" Paddles");
-            //movement_stuff(h,m);
+            movement_stuff(h,m);
 
-            return temp_name + " Paddles" + movement_stuff(h, m);
+            Setdescription(temp_name + " Paddles" + Getdescription());
+        }
+
+        public string get_description()
+        {
+            return Getdescription();
         }
     }
 

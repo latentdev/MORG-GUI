@@ -22,13 +22,13 @@ namespace MORG_GUI
     {
         public MainWindow()
         {
-            
+            InitializeComponent();
             Organism a = new ORG_A();
             Organism b = new ORG_B();
             Organism c = new ORG_C();
 
-            Field field = new Field(25, 25);
-            for (int x = 0; x < 3; x++)
+            Field field = new Field(3, 3);
+            for (int x = 0; x < 1; x++)
             {
                 textBox.Text = (a.PerformMove(a, field) + "\n" + b.PerformMove(b, field) + "\n" + c.PerformMove(c, field) + "\n");
             }
@@ -61,7 +61,28 @@ namespace MORG_GUI
                 line.StrokeThickness = 2;
                 myCanvas.Children.Add(line);
             }
-            InitializeComponent();
+            var color = (Color)ColorConverter.ConvertFromString("Red");
+            Text(a.Getx() * (400 / field.Getx_size() / 2), a.Gety()*(400/field.Gety_size()/2), "A", color);
+            Text(b.Getx() * ((400 / field.Getx_size()) / 2), b.Gety() * (400 / field.Gety_size() / 2), "B", color);
+            Text(c.Getx() * (400 / field.Getx_size() / 2), c.Gety() * (400 / field.Gety_size() / 2), "C", color);
+
+            //textbox.Text("Location of A is: " + a.Getx() * ((400 / field.Getx_size()) / 2) + "," + a.Gety() * ((400 / field.Gety_size()) / 2) + "/n" + "Location of B is: " + a.Getx() * ((400 / field.Getx_size()) / 2));
+        }
+        private void Text(double x, double y, string text,Color color)
+        {
+
+            TextBlock textBlock = new TextBlock();
+
+            textBlock.Text = text;
+
+            textBlock.Foreground = new SolidColorBrush(color);
+
+            Canvas.SetLeft(textBlock, x);
+
+            Canvas.SetTop(textBlock, y);
+
+            myCanvas.Children.Add(textBlock);
+
         }
     }
 }

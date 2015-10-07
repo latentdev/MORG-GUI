@@ -14,8 +14,8 @@ namespace MORG_GUI
 
         public Field()
         {
-            x_size = 10;
-            y_size = 10;
+            x_size = 100;
+            y_size = 100;
         }
 
         public Field(int x,int y)

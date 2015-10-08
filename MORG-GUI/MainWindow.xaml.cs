@@ -38,10 +38,13 @@ namespace MORG_GUI
 
 
             DrawGrid(field);
-            for (int i=0;i<3; i++)
-            step(x, field);
+            for (int i = 0; i < 3; i++)
+            {
+                step(x, field);
+                textBox.AppendText(x[0].getFinal_script() + "\n" + x[1].getFinal_script() + "\n" + x[2].getFinal_script() + "\n");
+            }
 
-            DrawTextBox(field, x, myCanvas, textBlock);
+            //DrawTextBox(field, x, myCanvas, textBlock);
 
             //Canvas myCanvas = new Canvas();
             DrawOrganism(field, x, textBlock);

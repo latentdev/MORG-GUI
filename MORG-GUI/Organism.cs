@@ -6,19 +6,122 @@ using System.Threading.Tasks;
 
 namespace MORG_GUI
 {
-    class Organism
+    interface ObserverMorg
+    {
+        void locationUpdate();
+        void preyUpdate(Organism m);
+    }
+    struct prey
+    {
+        public int x;
+        public int y;
+        public string type;
+        public Boolean target;
+        public Boolean alive;
+    }
+    class Organism : ObserverMorg
     {
         protected MoveBehavior movebehavior;
+        protected FeedBehavior feedbehavior;
         protected string type;
         protected int x;
         protected int y;
+        protected Boolean hunting = false;
+        protected Boolean alive = true;
+        protected Boolean full = false;
         protected string name;
         protected string final_script;
+        protected prey[] Prey;
+        protected int sight;
+        protected List<ObserverMorg> observers = new List<ObserverMorg>();
 
         public void PerformMove(Organism h, Field m)
         {
             movebehavior.move(h,m);
-            setFinal_script(movebehavior.get_description());
+            if (full == false)
+                setFinal_script(movebehavior.get_description());
+            else
+                full = false;
+        }
+
+        public void PerformFeed(Organism h,Field m)
+        {
+            feedbehavior.feed(h, m);
+            setFinal_script(feedbehavior.get_description());
+        }
+
+        public void look()
+        {
+            Boolean found = false;
+            int i = 0;
+
+            while (found == false&&i<Prey.Length)
+            {
+                int xdiff = (Prey[i].x - x);
+                int ydiff = (Prey[i].y - y);
+                if (Math.Sqrt((xdiff*xdiff) + (ydiff*ydiff)) < sight && Prey[i].alive == true)
+                {
+                    Prey[i].target = true;
+                    found = true;
+                    hunting = true;
+                }
+                else
+                    hunting = false;
+                //maybe add an out of sight else statement
+                i++;
+            }
+        }
+        public void Die()
+        {
+            alive = false;
+            x = -1;
+            y = -1;
+        }
+        public void RegisterObserver(ObserverMorg m)
+        {
+            observers.Add(m);
+        }
+
+        public void RemoveObserver(ObserverMorg m)
+        {
+            observers.Remove(m);
+        }
+
+        public void locationUpdate()
+        {
+            foreach(ObserverMorg m in observers)
+            {
+                m.preyUpdate(this);
+            }
+        }
+        public void preyUpdate(Organism m)
+        {
+            for(int i=0;i<Prey.Length;i++)
+                if(m.type==Prey[i].type)
+                {
+                    Prey[i].x = m.x;
+                    Prey[i].y = m.y;
+                    Prey[i].alive = m.alive;
+                    if (Prey[i].alive == false)
+                        Prey[i].target = false;
+                }
+        }
+        public void setFull(Boolean x)
+        {
+            full = x;
+        }
+        public Boolean getAlive()
+        {
+            return alive;
+        }
+        public Boolean getHunting()
+        {
+            return hunting;
+        }
+
+        public prey[] getPrey()
+        {
+            return Prey;
         }
 
         public int Getx()
@@ -50,6 +153,7 @@ namespace MORG_GUI
         {
             return type;
         }
+
         public void setFinal_script(string s)
         {
             final_script = s;
@@ -64,40 +168,59 @@ namespace MORG_GUI
     class ORG_A : Organism
     {
 
-        public ORG_A()
+        public ORG_A(Field m)
         {
             type = "A";
-            x = 1;
-            y = 1;
+            x = 0;
+            y = 0;
             name = "Organism A";
-            //Console.Write("Organism A ");
+            Prey = new prey[2];
+            Prey[0].type = "B";
+            Prey[1].type = "C";
+            Prey[0].target = false;
+            Prey[1].target = false;
+            sight = 4;
+            //locationUpdate();
             movebehavior = new Paddles();
+            feedbehavior = new Absorbs();
         }
     }
 
     class ORG_B : Organism
     {
-        public ORG_B()
+        public ORG_B(Field m)
         {
             type = "B";
-            x = 3;
-            y = 3;
+            x = m.Getx_size() - 1;
+            y = m.Gety_size() - 1;
             name = "Organism B";
-            //Console.Write("Organism B ");
+            Prey = new prey[1];
+            Prey[0].type = "A";
+            Prey[0].target = false;
+            sight = 4;
+            //locationUpdate();
             movebehavior = new Oozes();
+            feedbehavior = new Envelopes();
         }
     }
 
     class ORG_C : Organism
     {
-        public ORG_C()
+        public ORG_C(Field m)
         {
             type = "C";
-            x = 2;
-            y = 2;
+            x = m.Getx_size() / 2;
+            y = m.Gety_size() / 2;
             name = "Organism C";
-            //Console.Write("Organism C ");
+            Prey = new prey[2];
+            Prey[0].type = "A";
+            Prey[1].type = "B";
+            Prey[0].target = false;
+            Prey[1].target = false;
+            sight = 4;
+            //locationUpdate();
             movebehavior = new Paddles();
+            feedbehavior = new Envelopes();
         }
     }
 

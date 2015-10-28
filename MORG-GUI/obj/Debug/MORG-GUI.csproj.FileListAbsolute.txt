@@ -12,3 +12,7 @@ C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug
 C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug\MORG-GUI.exe
 C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug\MORG-GUI.pdb
 C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug\MORG-GUI.csprojResolveAssemblyReference.cache
+C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\bin\Debug\MORG-GUI.exe.manifest
+C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\bin\Debug\MORG-GUI.application
+C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug\MORG-GUI.exe.manifest
+C:\Users\laten\Documents\Visual Studio 2015\Projects\MORG-GUI\MORG-GUI\obj\Debug\MORG-GUI.application

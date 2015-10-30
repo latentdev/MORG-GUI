@@ -77,7 +77,7 @@ namespace MORG_GUI
                 myCanvas.Children.Add(line);
             }
         }
-        private void DrawOrganism(Field field, Organism[] a,TextBlock[] textBlock)
+        private void DrawOrganism(Field field, List <Organism> a,TextBlock[] textBlock)
         {
             var color = (Color)ColorConverter.ConvertFromString("Red");
             int width = 500 / field.Getx_size();
@@ -92,11 +92,6 @@ namespace MORG_GUI
         {
             
             textBox.AppendText(x[0].getFinal_script() + "\n" + x[1].getFinal_script()+ "\n" + x[2].getFinal_script() + "\n"+"\n");
-            //textBox.Focus();
-            //textBox.CaretIndex = textBox.Text.Length;
-            //textBox.ScrollToEnd();
-
-
         }
 
         private void step(Organism[] a,Field field)

@@ -12,7 +12,8 @@ namespace MORG_GUI
         protected int x_size;
         protected int y_size;
         public Random n = new Random();
-        public Organism[] orgs = new Organism[3];
+        public List<Organism> orgs = new List<Organism>();
+        //public Organism[] orgs = new Organism[3];
         protected int full = 0;
         
 
@@ -31,9 +32,9 @@ namespace MORG_GUI
         {
             x_size = x;
             y_size = y;
-            orgs[0] = new ORG_A(this);
-            orgs[1] = new ORG_B(this);
-            orgs[2] = new ORG_C(this);
+            orgs.Add(new ORG_A(this));
+            orgs.Add(new ORG_B(this));
+            orgs.Add(new ORG_C(this));
             orgs[0].RegisterObserver(orgs[1]);
             orgs[0].RegisterObserver(orgs[2]);
             orgs[1].RegisterObserver(orgs[0]);
@@ -48,7 +49,7 @@ namespace MORG_GUI
         {
             Boolean found = false;
             int index=0;
-            for(int i=0;i<orgs.Length;i++)
+            for(int i=0;i<orgs.Count;i++)
             {
                 if (type == orgs[i].Gettype())
                 {

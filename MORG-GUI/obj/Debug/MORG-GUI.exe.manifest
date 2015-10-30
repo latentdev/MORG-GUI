@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MORG-GUI.exe" size="20416">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MORG-GUI.exe" size="20928">
       <assemblyIdentity name="MORG-GUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lF6yU9Ur90OgdgMWSjZrFbSP4tTfSPi5ABnxi0vVJ9Q=</dsig:DigestValue>
+        <dsig:DigestValue>XcR5uPC9jmqTQS+R2OpHI4esQYogJ0giIZN7uGirXMQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

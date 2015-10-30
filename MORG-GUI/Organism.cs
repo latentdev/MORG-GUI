@@ -123,7 +123,14 @@ namespace MORG_GUI
         {
             return Prey;
         }
-
+        public void SetType(string in_type)
+        {
+            type = in_type;
+        }
+        public void SetName(string in_name)
+        {
+            name = in_name;
+        }
         public int Getx()
         {
             return x;
@@ -144,6 +151,53 @@ namespace MORG_GUI
             y = coord;
         }
 
+        public void SetMoveBehavior(string in_move)
+        {
+            switch(in_move)
+            {
+                case "Paddles":
+                    {
+                        movebehavior = new Paddles();
+                        break;
+                    }
+                case "Oozes":
+                    {
+                        movebehavior = new Oozes();
+                        break;
+                    }
+            }
+        }
+
+        public void SetFeedBehavior(string in_feed)
+        {
+            switch (in_feed)
+            {
+                case "Absorbs":
+                    {
+                        feedbehavior = new Absorbs();
+                        break;
+                    }
+                case "Envelops":
+                    {
+                        feedbehavior = new Envelopes();
+                        break;
+                    }
+            }
+        }
+        public void SetPrey(string[] in_prey)
+        {
+            Prey = new prey[in_prey.Length];
+            for (int i=0;i<in_prey.Length;i++)
+            {
+                Prey[i].type = in_prey[i];
+                Prey[i].target = false;
+                Prey[i].alive = true;
+            }
+        }
+        public void SetSight(int x)
+        {
+            sight = x;
+        }
         public string Getname()
         {
             return name;
@@ -165,7 +219,7 @@ namespace MORG_GUI
         }
     }
 
-    class ORG_A : Organism
+    /*class ORG_A : Organism
     {
 
         public ORG_A(Field m)
@@ -222,6 +276,6 @@ namespace MORG_GUI
             movebehavior = new Paddles();
             feedbehavior = new Envelopes();
         }
-    }
+    }*/
 
 }

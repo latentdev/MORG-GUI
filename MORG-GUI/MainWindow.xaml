@@ -17,8 +17,8 @@
         </Border>
         <TextBox x:Name="textBox" Height="94" Canvas.Left="0" TextWrapping="Wrap" Canvas.Top="511" Width="361" ToolTip="Organism's Movements" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
         <Button x:Name="button" Click="Button_Click" Content="Continue" Canvas.Left="378" Canvas.Top="511" Width="122" Height="94" ToolTip="Click button to continue"/>
-        <TextBlock x:Name="textBlock0" Width="{Binding Path=ActualWidth, ElementName=ORGA}" TextWrapping="Wrap"><Bold>A</Bold></TextBlock>
+        <!--<TextBlock x:Name="textBlock0" Width="{Binding Path=ActualWidth, ElementName=ORGA}" TextWrapping="Wrap"><Bold>A</Bold></TextBlock>
         <TextBlock x:Name="textBlock1" Width="{Binding Path=ActualWidth, ElementName=ORGB}" TextWrapping="Wrap"><Bold>B</Bold></TextBlock>
-        <TextBlock x:Name="textBlock2" Width="{Binding Path=ActualWidth, ElementName=ORGC}" TextWrapping="Wrap"><Bold>C</Bold></TextBlock>
+        <TextBlock x:Name="textBlock2" Width="{Binding Path=ActualWidth, ElementName=ORGC}" TextWrapping="Wrap"><Bold>C</Bold></TextBlock>-->
     </Canvas>
 </Window>

@@ -22,7 +22,15 @@ namespace MORG_GUI
     class MorgReader:ReaderDecorator
     {
         //override protected Reader wrappedReader;
-        protected string line;
+        protected string line= "empty";
+        string type;
+        //string name;
+        string moveBehavior;
+        string feedBehavior;
+        string[] Prey;
+        int x;
+        int y;
+
         public MorgReader(Reader r): base(r)
         {
         }
@@ -37,8 +45,28 @@ namespace MORG_GUI
         }
         public Organism BuildOrganism()
         {
-            Organism builtOrganism=new Organism();//factory goes here
+            Factory morgFactory=new Factory();
+            CSV();
+            Organism builtOrganism = morgFactory.BuildMorg(type, x, y, moveBehavior, feedBehavior, Prey);
             return builtOrganism;
+        }
+        public void CSV()
+        {
+            //ReadLine();
+            string[] values = line.Split(',');
+            type = values[0];
+            int.TryParse(values[1], out x);
+            int.TryParse(values[2], out y);
+            moveBehavior = values[3];
+            feedBehavior = values[4];
+            string[] prey = feedBehavior.Split(' ');
+            feedBehavior = prey[0];
+            Prey = new string[prey.Length - 1];
+            for (int i=1; i<prey.Length; i++)
+            {
+                Prey[i - 1] = prey[i];
+            }
+
         }
 
     }

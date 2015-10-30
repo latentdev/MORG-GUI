@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace MORG_GUI
 {
@@ -15,6 +16,9 @@ namespace MORG_GUI
         public List<Organism> orgs = new List<Organism>();
         //public Organism[] orgs = new Organism[3];
         protected int full = 0;
+        MorgReader morgReader = new MorgReader(new FileReader("MORGS.txt"));
+        public TextBlock[] morgs;// this exists only for the GUI to use. I could only pass one object into the button click event and the event needs to know about both the field and the textblock array.
+
         
 
 
@@ -22,9 +26,7 @@ namespace MORG_GUI
         {
             x_size = 10;
             y_size = 10;
-            orgs[0] = null;
-            orgs[1] = null;
-            orgs[2] = null;
+
 
         }
 
@@ -32,19 +34,38 @@ namespace MORG_GUI
         {
             x_size = x;
             y_size = y;
-            orgs.Add(new ORG_A(this));
-            orgs.Add(new ORG_B(this));
-            orgs.Add(new ORG_C(this));
-            orgs[0].RegisterObserver(orgs[1]);
-            orgs[0].RegisterObserver(orgs[2]);
-            orgs[1].RegisterObserver(orgs[0]);
-            orgs[1].RegisterObserver(orgs[2]);
-            orgs[2].RegisterObserver(orgs[0]);
+            CreateMorgs();
+            RegObservers();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < orgs.Count; i++)
                 orgs[i].locationUpdate();
         }
+        public void CreateMorgs()
+        {
+            while (morgReader.ReadLine()!=null)
+            {
+                orgs.Add(morgReader.BuildOrganism());
+            }
+            morgReader.Close();
+        }
 
+        public void RegObservers()
+        {
+            for(int i=0;i<orgs.Count;i++)
+            {
+                for (int m=0;m<orgs[i].getPrey().Length;m++)
+                {
+                    for (int z=0;z<orgs.Count;z++)
+                    {
+                        if (orgs[i].getPrey()[m].type==orgs[z].Gettype())
+                        {
+                            orgs[z].RegisterObserver(orgs[i]);
+                        }
+                    }
+                    
+                }
+            }
+        }
         public Organism getOrganism(string type)
         {
             Boolean found = false;
@@ -98,9 +119,9 @@ namespace MORG_GUI
         public void sim_field()
         {
             int step = 0;
-            for (int m = 0; m < 3; m++)
+            for (int m = 0; m < orgs.Count; m++)
                 orgs[m].PerformMove(orgs[m], this);
-            draw_Field();
+            //draw_Field();
             for (int z = 0; z < 3; z++)
                 Console.WriteLine(orgs[z].getFinal_script());
             Console.WriteLine("step={0}", step);

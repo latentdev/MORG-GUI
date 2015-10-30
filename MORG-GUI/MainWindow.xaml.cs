@@ -24,13 +24,18 @@ namespace MORG_GUI
         public MainWindow()
         {
             InitializeComponent();
-            Field field = new Field(15, 15);
+            Field field = new Field(20, 20);
             button.Tag = field;
              
-            TextBlock[] textBlock = new TextBlock[3];
-            textBlock[0] = textBlock0;
-            textBlock[1] = textBlock1;
-            textBlock[2] = textBlock2;
+            TextBlock[] textBlock = new TextBlock[field.orgs.Count];
+            field.morgs = textBlock;
+            for (int i=0;i<field.orgs.Count;i++)
+            {
+                textBlock[i] = new TextBlock();
+                textBlock[i].Text = field.orgs[i].Gettype();
+                textBlock[i].FontWeight = FontWeights.Bold;
+                myCanvas.Children.Add(textBlock[i]);
+            }
 
             DrawGrid(field);
             DrawOrganism(field, field.orgs, textBlock);
@@ -82,36 +87,30 @@ namespace MORG_GUI
             var color = (Color)ColorConverter.ConvertFromString("Red");
             int width = 500 / field.Getx_size();
             string t;
-            for (int m = 0; m < 3; m++)
+            for (int m = 0; m < a.Count; m++)
             {
                 t = a[m].Gettype();
                 Text(a[m].Getx() * width + (width / 2)-(textBlock[m].ActualWidth/2), a[m].Gety() * width + (width / 2)-(textBlock[m].ActualHeight/2), t, color, textBlock[m]);
-            }
-        }
-        private void DrawTextBox(Field field,Organism[] x, Canvas control,TextBlock[] textBlock)
-        {
-            
-            textBox.AppendText(x[0].getFinal_script() + "\n" + x[1].getFinal_script()+ "\n" + x[2].getFinal_script() + "\n"+"\n");
-        }
-
-        private void step(Organism[] a,Field field)
-        {
-            for (int m = 0; m < 3; m++)
-            {
-                a[m].PerformMove(a[m], field);
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Field x = (sender as FrameworkElement).Tag as Field;
-            TextBlock[] m = new TextBlock[3];
-            m[0] = textBlock0;
-            m[1] = textBlock1;
-            m[2] = textBlock2;
+
+            TextBlock[] m = x.morgs;
+
             x.sim_field();
             DrawOrganism(x, x.orgs, m);
-            textBox.AppendText(x.orgs[0].getFinal_script() + "\n" + x.orgs[1].getFinal_script() + "\n" + x.orgs[2].getFinal_script() + "\n"+"\n");
+            string text = null;
+
+            for (int i=0;i<x.orgs.Count;i++)
+            {
+                text += x.orgs[i].getFinal_script() + "\n";
+            }
+            text += "\n";
+
+            textBox.AppendText(text);
             myCanvas.Dispatcher.Invoke(DispatcherPriority.Normal,new Action(delegate()
             {
                 button.Content = button.Content;
